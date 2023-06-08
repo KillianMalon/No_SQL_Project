@@ -1,7 +1,9 @@
 import puppeteer from 'puppeteer';
 import mongoose from "mongoose";
 const uri = "mongodb+srv://admin:admin@clusternode.qh7tm6h.mongodb.net/tirexo?retryWrites=true&w=majority";
-import Movie from '../Interface/api/models/Movie.js'
+import Movie from "../Interface/API/models/movies.js";
+
+
 
 /// Scraping Tirexo
 (async () => {

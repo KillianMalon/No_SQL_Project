@@ -1,6 +1,5 @@
 import {model, Schema} from "mongoose";
 
-/// This is the schema for the movies collection
 const MovieSchema = new Schema({
     title: String,
     year: String,

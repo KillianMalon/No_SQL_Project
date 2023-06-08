@@ -7,10 +7,7 @@ async function main () {
   const app = express()
 
   await configure(app)
-  app.get('/', async (req, res) => {
-    const Movies = await movies.find().limit(25)
-    res.render('index', { Movies })
-  })
+  
   app.listen(process.env.PORT, (err) => {
     if (err) {
       console.log(err)

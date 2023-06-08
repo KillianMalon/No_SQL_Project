@@ -1,6 +1,5 @@
 import express from 'express'
 import configure from './configurations/configuration.js'
-import movies from './models/movies.js'
 
 
 async function main () {

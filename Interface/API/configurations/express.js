@@ -1,5 +1,7 @@
 import express from 'express'
-
+import moviesRoutes from '../routes/movies.js'
+import authRoutes from '../routes/auth.js'
+import movies from '../models/movies.js'
 /**
  * Express configuration.
  * @param {express.Application} app
@@ -15,9 +17,19 @@ import express from 'express'
 
 
 export async function configure (app) {
-  app.set('view engine', 'ejs')
+  // app.use(express.static('public'))
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
- 
-  console.log('Express Initialized.')
+  app.set('view engine', 'ejs')
+
+  app.use('/movies', moviesRoutes)
+  app.use('/auth', authRoutes)
+  //Récupère les 25 films en base les plus récents grâce à leur date de sortie
+  
+
+
+  app.get('/', async (req, res) => {
+    const Movies = await movies.find().sort({date: -1}).limit(25)
+    res.render('index', { Movies })
+  })
 }

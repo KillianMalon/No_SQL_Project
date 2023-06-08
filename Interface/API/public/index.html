@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des films</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Projet Cinéma</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liste des films</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/auth/connexion.html">Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/auth/inscription.html">S'inscrire</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+<main class="container my-4">
+    <h1>Liste des films</h1>
+
+    <form class="form-inline my-4">
+        <label class="mr-2" for="input-recherche-titre">Titre :</label>
+        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre">
+
+        <label class="mr-2" for="input-recherche-realisateur">Réalisateur :</label>
+        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur">
+
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+
+    <div id="liste-films"></div>
+</main>
+
+<footer class="bg-light py-4">
+    <div class="container text-center">
+        <p>Projet Cinéma - 2023</p>
+    </div>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

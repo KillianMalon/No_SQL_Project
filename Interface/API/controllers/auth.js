@@ -8,7 +8,6 @@ export const registerView = (req, res) => {
 
 // For View 
 export const loginView = (req, res) => {
-
     res.render("login", {
     } );
 }

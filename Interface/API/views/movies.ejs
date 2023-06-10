@@ -38,14 +38,14 @@
 <main class="container my-4">
     <h1>Liste des films</h1>
 
-    <form class="form-inline my-4" method="get" action="/movies/search">
+    <form class="form-inline my-4" method="post" action="/movies/search/">
         <label class="mr-2" for="input-recherche-titre">Titre :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre">
+        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre" name="input-recherche-titre">
 
         <label class="mr-2" for="input-recherche-realisateur">Réalisateur :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur">
+        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur" name="input-recherche-realisateur">
 
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit"  class="btn btn-primary">Rechercher</button>
     </form>
 
     <div id="liste-films">
@@ -90,5 +90,27 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/script.js"></script>
+<script>
+    //Make a function to retirve the movies from the database based on the search form
+    function getMovies() {
+        //Get the values from the search form
+        let title = $('#input-recherche-titre').val();
+        let director = $('#input-recherche-realisateur').val();
+        console.log(title);
+        //Make an ajax request to the server
+        $.ajax({
+            url: '/movies/search',
+            method: 'POST',
+            data: {
+                title: title,
+                director: director
+            },
+            success: function (data) {
+                //If the request is successful, replace the content of the div with the id liste-films with the new movies
+                $('#liste-films').html(data);
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -8,5 +8,5 @@ router.get('/', moviesView)
 router.get('/page/:page', moviesView)
 router.get('/details/:title', movieDetailsView)
 router.get('/search', moviesSearchView)
-
+router.post('/search', moviesSearchView)
 export default router

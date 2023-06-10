@@ -14,6 +14,7 @@ async function main () {
       console.log(`Server Initialized ON ${process.env.PORT}`)
     }
   })
+  
 }
 
 main()

@@ -8,7 +8,10 @@ const moviesView = async (req, res) => {
     // This is the page number
     const page = req.params.page || 1;
     const numMovies = await Movies.count();
-    
+    // Find all the movies in the database
+    // Skip the first (page number - 1) * results per page
+    // Limit the results to the results per page
+    // Then render the movies page with the movies
     Movies.find().skip((resPerPage * page) - resPerPage).limit(resPerPage).then((movies) => {
         res.render("movies", {
             Movies: movies,
@@ -22,11 +25,14 @@ const moviesView = async (req, res) => {
     })
 }
 
+// This is the controller for the movies route
+// It takes the page number as a parameter
+// It renders the movies page with the movies
 export const moviesSearchView = async (req, res) => {
     // This is the page number
     const page = req.params.page || 1;
     const numMovies = await Movies.count();
-    
+
     if(req.body['input-recherche-titre'] != null && req.body['input-recherche-realisateur'] == null){
         Movies.find({title: { $regex:  req.body['input-recherche-titre'], $options: 'i' }}).skip((resPerPage * page) - resPerPage).limit(resPerPage).then((movies) => {
             res.render("search", {
@@ -83,8 +89,10 @@ export const moviesSearchView = async (req, res) => {
         })
     }
 }
-
+s
 export const movieDetailsView = (req, res) => {
+    // Find the movie with the title in the url
+    // Then render the details page with the movie
     Movies.findOne({title: req.params.title}).then((movie) => {
         res.render("details", {Movie: movie});
     })

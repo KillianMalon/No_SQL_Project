@@ -1,5 +1,6 @@
 import {model, Schema} from "mongoose";
 
+// Création du schéma de données pour les films
 const MovieSchema = new Schema({
     title: Object,
     year: String,
@@ -16,4 +17,5 @@ const MovieSchema = new Schema({
     likePercentage: Number
 })
 
+// Création du modèle de données pour les films
 export default model('Movie', MovieSchema)

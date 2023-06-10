@@ -22,13 +22,13 @@
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="movies">Liste des films</a>
+                    <a class="nav-link" href="../../movies">Liste des films</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Se connecter</a>
+                    <a class="nav-link" href="../../login">Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="register">S'inscrire</a>
+                    <a class="nav-link" href="../../register">S'inscrire</a>
                 </li>
             </ul>
         </div>
@@ -46,14 +46,14 @@
         <p>Ce site rescence une multitude de films ayant été récupéres sur Tirexo par le biais d'un script de Scrapping</p>
     </div>
 
-    <form class="form-inline my-4">
+    <form class="form-inline my-4" method="post" action="/movies/search">
         <label class="mr-2" for="input-recherche-titre">Titre :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre">
+        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre" name="input-recherche-titre">
 
         <label class="mr-2" for="input-recherche-realisateur">Réalisateur :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur">
+        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur" name="input-recherche-realisateur">
 
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit"  class="btn btn-primary">Rechercher</button>
     </form>
 
     <div id="liste-films">
@@ -67,7 +67,7 @@
                 <p class="card-text"><%= movie.duration %></p>
                 <p class="card-text"><%= movie.year %></p>
                 <p class="card-text"><%= movie.genders %></p>
-                <a href="./movies/details/<%= movie.title %>" class="btn btn-primary">Voir le film</a>
+                <a href="../../movies/details/<%= movie.title %>" class="btn btn-primary">Voir le film</a>
             </div>
             </div>
           <% }) %>
@@ -80,11 +80,11 @@
           <% if (currentPage == 1 && pages > 1) { %> 
             <li class="page-item disabled"><a class="page-link">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#"><%= parseInt(currentPage) %></a></li>
-            <li class="page-item"><a class="page-link" href="/movies/page/<%= parseInt(currentPage) + 1 %>">Next</a></li>
+            <li class="page-item"><a class="page-link" href="/movies/search/page/<%= parseInt(currentPage) + 1 %>">Next</a></li>
           <% } else if (currentPage < pages) { %> 
-            <li class="page-item"><a class="page-link" href="/movies/page/<%= parseInt(currentPage) - 1 %>">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="/movies/search/page/<%= parseInt(currentPage) - 1 %>">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#"><%= parseInt(currentPage) %></a></li>
-            <li class="page-item"><a class="page-link" href="/movies/page/<%= parseInt(currentPage) + 1 %>">Next</a></li>
+            <li class="page-item"><a class="page-link" href="/movies/search/page/<%= parseInt(currentPage) + 1 %>">Next</a></li>
           <% } %>
         </ul>
       </nav>

@@ -1,10 +1,15 @@
-// import {model, Schema} from "mongoose";
-// import uniqueValidator from "mongoose-unique-validator";
-// import crypto  from "crypto";
-// import jwt from "jsonwebtoken";
+import {model, Schema} from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
+import crypto  from "crypto";
+import jwt from "jsonwebtoken";
 
-// const secret ="oui"
+const secret ="oui"
 
+const UserSchema = new Schema({
+    email: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
+    password: String,
+});
+// const UserSchema = new Schema({
 // const UserSchema = new Schema({
 //   username: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
 //   email: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
@@ -49,4 +54,4 @@
 // };
 
 
-// export default model('User', UserSchema);
+export default model('User', UserSchema);

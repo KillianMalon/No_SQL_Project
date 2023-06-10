@@ -47,14 +47,14 @@
     </div>
 
     
-    <form class="form-inline my-4">
+    <form class="form-inline my-4" method="post" action="/movies/search">
         <label class="mr-2" for="input-recherche-titre">Titre :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre">
+        <input type="text" class="form-control mr-2" id="input-recherche-titre" placeholder="Rechercher par titre" name="input-recherche-titre">
 
         <label class="mr-2" for="input-recherche-realisateur">Réalisateur :</label>
-        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur">
+        <input type="text" class="form-control mr-2" id="input-recherche-realisateur" placeholder="Rechercher par réalisateur" name="input-recherche-realisateur">
 
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit"  class="btn btn-primary">Rechercher</button>
     </form>
 
     <div id="liste-films">

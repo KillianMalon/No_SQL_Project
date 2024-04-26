@@ -89,7 +89,7 @@ export const moviesSearchView = async (req, res) => {
         })
     }
 }
-s
+
 export const movieDetailsView = (req, res) => {
     // Find the movie with the title in the url
     // Then render the details page with the movie

@@ -23,11 +23,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Change directory to Interface/API
-      run: cd Interface/API
-
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd Interface/API
+        npm install
 
     - name: Run tests
-      run: npm test
+      run: |
+        cd Interface/API
+        npm test

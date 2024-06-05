@@ -40,6 +40,7 @@ jobs:
       env:
         NODE_ENV: test
         PORT: ${{ secrets.PORT }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     - name: Wait for application to be available
       run: |
@@ -53,4 +54,5 @@ jobs:
       env:
         CYPRESS_baseUrl: http://localhost:8080
         PORT: ${{ secrets.PORT }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test

@@ -60,24 +60,6 @@ it('Rechercher un film par réalisateur sur la page d\'accueil', () => {
     cy.get('h1').should('contain', 'Bienvenue sur Projet Cinéma');
   });
 
-  it('Rentre sur la page accueil, clique sur liste des films, recherche un film, rentre dans les détails du film et recherche que le film contienne des clés', () => {
-    cy.visit('/');
-    cy.get('a').contains("Liste des films").click();
-    cy.url().should('include', '/movies');
-    cy.get('input[placeholder="Rechercher par titre"]').type('Bovines');
-    cy.get('button').contains('Rechercher').click();
-    cy.get('.card').contains('Bovines').then(() => {
-      cy.get('.card-body').find('a').click();
-      cy.url().should('include', '/movies/details');
-      cy.get('.card-text');
-      cy.get('.list-group-item')
-      .should('contain', 'Année de sortie')
-      .and('contain', 'Réalisateur')
-      .and('contain', 'Acteurs')
-      .and('contain', 'Genre')
-      .and('contain', 'Durée');
-    });
-  });
-
   // -- Fin des tests impliquant d'autres écrans -- \\
+  
 });

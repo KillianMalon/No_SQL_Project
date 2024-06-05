@@ -1,4 +1,33 @@
-describe('Test page accueil', () => {
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+let mongoServer;
+
+describe('Tests page accueil', () => {
+
+  before(async () => {
+      mongoServer = await MongoMemoryServer.create();
+      const uri = mongoServer.getUri();
+
+      await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  });
+
+  after(async () => {
+      await mongoose.disconnect();
+      await mongoServer.stop();
+  });
+
+  beforeEach(async () => {
+      const movies = [
+          { title: 'Movie 1', realisator: 'Realisator 1' },
+          { title: 'Movie 2', realisator: 'Realisator 2' },
+          { title: 'Movie 3', realisator: 'Realisator 1' }
+      ];
+      await Movies.insertMany(movies);
+  });
+
+  afterEach(async () => {
+      await Movies.deleteMany();
+  });
 
 // Les tests réalisés permettent de tester TOUS les éléments de la page d'accueil ainsi qu'une combinaison d'écrans
 

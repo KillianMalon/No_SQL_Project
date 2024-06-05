@@ -36,7 +36,6 @@ jobs:
     - name: Start application
       run: |
         cd Interface/API
-        echo ${{ secrets.PORT }}
         npm start &
       env:
         NODE_ENV: test
@@ -50,4 +49,8 @@ jobs:
     - name: Run Graphic tests (Cypress)
       run: |
         cd Interface/API
-        npx cypress open
+        npx cypress run
+      env:
+        CYPRESS_baseUrl: http://localhost:8080
+        PORT: ${{ secrets.PORT }}
+    environment: Test

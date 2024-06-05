@@ -39,6 +39,7 @@ jobs:
         npm start &
       env:
         NODE_ENV: test
+        PORT: ${{ secrets.PORT }}
 
     - name: Wait for application to be available
       run: |

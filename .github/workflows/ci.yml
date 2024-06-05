@@ -36,6 +36,7 @@ jobs:
     - name: Start application
       run: |
         cd Interface/API
+        echo ${{ secrets.PORT }}
         npm start &
       env:
         NODE_ENV: test

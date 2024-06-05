@@ -1,8 +1,9 @@
-const webpack = require('webpack');
-const { startDevServer } = require('@cypress/webpack-dev-server');
-const path = require('path');
+import { defineConfig } from "cypress";
+import webpack from 'webpack';
+import { startDevServer } from '@cypress/webpack-dev-server';
+import path from 'path';
 
-module.exports = defineConfig({
+export default defineConfig({
   video: false,
 
   e2e: {
@@ -13,15 +14,14 @@ module.exports = defineConfig({
           webpackConfig: {
             resolve: {
               alias: {
-                // Make sure the path to your node_modules is correct
-                'node:crypto': require.resolve('crypto-browserify'),
-                'node:net': require.resolve('net-browserify'),
+                'node:crypto': 'crypto-browserify',
+                'node:net': 'net-browserify',
               },
               fallback: {
-                crypto: require.resolve('crypto-browserify'),
-                net: require.resolve('net-browserify'),
-                stream: require.resolve('stream-browserify'),
-                buffer: require.resolve('buffer'),
+                crypto: 'crypto-browserify',
+                net: 'net-browserify',
+                stream: 'stream-browserify',
+                buffer: 'buffer',
               },
             },
             plugins: [
@@ -33,7 +33,6 @@ module.exports = defineConfig({
           },
         })
       );
-      // Other setupNodeEvents code...
       return config;
     },
     baseUrl: "http://localhost:8080",

@@ -39,7 +39,7 @@ jobs:
         npm start &
       env:
         NODE_ENV: test
-        PORT: ${{ secrets.PORT }}
+        PORT: 8080
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     - name: Wait for application to be available
@@ -53,6 +53,6 @@ jobs:
         npx cypress run
       env:
         CYPRESS_baseUrl: http://localhost:8080
-        PORT: ${{ secrets.PORT }}
+        PORT: 8080
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test

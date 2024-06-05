@@ -32,3 +32,8 @@ jobs:
       run: |
         cd Interface/API
         npm test
+
+    - name: Run Graphic tests
+      run: |
+        cd Interface/API
+        npx cypress open

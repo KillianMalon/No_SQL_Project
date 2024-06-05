@@ -13,5 +13,5 @@ Voici un tableau listant les éléments évalués, et leur présence dans le pro
 | Tests Unitaires | ✅ : Interface/API/test/movie.test.js |
 | Tests graphiques| ✅ : ***Ajouter Lien***|
 | Tests d'Intégration| ✅ : ***Ajouter Lien*** |
-| Déclancgement automatique des tests | ✅ : Via GitActions. .github/workflows |
+| Déclanchement automatique des tests | ✅ : Via GitActions. .github/workflows |
 | Isolation BDD | ✅ : cf Interface/API/test/movie.test.js|

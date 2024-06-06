@@ -78,7 +78,7 @@ jobs:
           git pull origin main
           cd /interface/API
           npm install
-          pm2 restart myapp
+          pm2 restart britto
         EOF  
     environment: Test      
     

@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main, release]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -60,7 +60,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/release'  # Déclencher ce job uniquement pour la branche release
+    if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
     steps:
     - name: Checkout repository

@@ -76,7 +76,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no deployer@176.160.95.82 << 'EOF'
           cd /var/www/html/britto
           git pull origin main
-          cd /interface/API
+          cd /Interface/API
           npm install
           pm2 restart britto
         EOF  

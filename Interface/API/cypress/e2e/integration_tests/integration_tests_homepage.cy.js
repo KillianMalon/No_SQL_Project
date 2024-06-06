@@ -1,11 +1,4 @@
 // cypress/e2e/ui_tests/ui_homepage.cy.js
-
-import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import Movies from '../../../models/movies.js';
-
-let mongoServer;
-
 describe('Integration Test', () => {
 
   it('should search for movies and view details', () => {

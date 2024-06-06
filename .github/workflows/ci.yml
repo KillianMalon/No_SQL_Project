@@ -32,6 +32,12 @@ jobs:
       run: |
         cd Interface/API
         npm test
+    
+    - name: Start MongoDB Memory Server
+      run: |
+        npx mongodb-memory-server --port 27017 &
+      env:
+        MONGOMS_DISABLE_VERSION_CHECK: true
 
     - name: Start application
       run: |
@@ -40,7 +46,7 @@ jobs:
       env:
         NODE_ENV: test
         PORT: 8080
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_URL: mongodb://localhost:27017/testdb
 
     - name: Wait for application to be available
       run: |
@@ -54,5 +60,5 @@ jobs:
       env:
         CYPRESS_baseUrl: http://localhost:8080
         PORT: 8080
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_URL: mongodb://localhost:27017/testdb
     environment: Test

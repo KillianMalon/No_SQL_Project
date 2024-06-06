@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main, integrationtests]
+    branches: [main, release]
   pull_request:
     branches: [main]
 
@@ -51,4 +51,32 @@ jobs:
       run: |
         cd Interface/API
         npx cypress run
+      env:
+        CYPRESS_baseUrl: http://localhost:8080
+        PORT: 8080
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/release'  # Déclencher ce job uniquement pour la branche release
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
+
+    - name: Deploy to Server (Raspberry Pi)
+      run: |
+        ssh -o StrictHostKeyChecking=no deployer@176.160.95.82 << 'EOF'
+          cd /var/www/html/britto
+          git pull origin main
+          cd /interface/API
+          npm install
+          pm2 restart myapp
+        EOF    

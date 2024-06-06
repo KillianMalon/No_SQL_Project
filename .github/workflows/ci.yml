@@ -70,7 +70,7 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
-
+        
     - name: Deploy to Server (Raspberry Pi)
       run: |
         ssh -o StrictHostKeyChecking=no deployer@176.160.95.82 << 'EOF'
@@ -79,4 +79,5 @@ jobs:
           cd /interface/API
           npm install
           pm2 restart myapp
-        EOF    
+        EOF  
+    environment: Test      

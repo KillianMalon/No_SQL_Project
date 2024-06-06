@@ -77,7 +77,7 @@ jobs:
           cd /var/www/html/britto
           git pull origin main
           ls
-          cd /Interface/API
+          cd Interface/API
           npm install
           pm2 restart britto
         EOF  

@@ -2,13 +2,11 @@
 
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { expect } from 'chai';
 import Movies from '../../../models/movies.js';
-import moviesService from '../../../services/movies.js';
 
 let mongoServer;
 
-describe('MoviesService', () => {
+describe('Integration Test', () => {
     before(async () => {
         mongoServer = await MongoMemoryServer.create();
         const uri = mongoServer.getUri();

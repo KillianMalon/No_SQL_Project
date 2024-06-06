@@ -78,7 +78,7 @@ jobs:
           git pull origin main
           ls
           cd Interface/API
-          npm install
-          pm2 restart britto
+          npm install --production
+          pm2 restart britto || pm2 start npm --name "britto" -- start
         EOF  
     environment: Test

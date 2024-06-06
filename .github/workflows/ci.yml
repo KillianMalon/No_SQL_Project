@@ -77,7 +77,6 @@ jobs:
           export PATH=$PATH:/opt/node-v16.6.2-linux-armv7l/bin
           cd /var/www/html/britto
           git pull origin main
-          ls
           cd Interface/API
           npm install --production
           pm2 restart britto || pm2 start npm --name "britto" -- start

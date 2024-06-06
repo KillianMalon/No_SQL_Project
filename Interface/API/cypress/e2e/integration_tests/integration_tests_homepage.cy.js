@@ -7,30 +7,6 @@ import Movies from '../../../models/movies.js';
 let mongoServer;
 
 describe('Integration Test', () => {
-    before(async () => {
-        mongoServer = await MongoMemoryServer.create();
-        const uri = mongoServer.getUri();
-
-        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    });
-
-    after(async () => {
-        await mongoose.disconnect();
-        await mongoServer.stop();
-    });
-
-    beforeEach(async () => {
-        const movies = [
-            { title: 'Movie 1', realisator: 'Realisator 1' },
-            { title: 'Movie 2', realisator: 'Realisator 2' },
-            { title: 'Movie 3', realisator: 'Realisator 1' }
-        ];
-        await Movies.insertMany(movies);
-    });
-
-    afterEach(async () => {
-        await Movies.deleteMany();
-    });
 
   it('should search for movies and view details', () => {
     // Visit the home page

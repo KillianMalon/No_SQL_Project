@@ -74,6 +74,7 @@ jobs:
     - name: Deploy to Server (Raspberry Pi)
       run: |
         ssh -o StrictHostKeyChecking=no deployer@176.160.95.82 << 'EOF'
+          export PATH=$PATH:/opt/node-v16.6.2-linux-armv7l/bin
           cd /var/www/html/britto
           git pull origin main
           ls

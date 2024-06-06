@@ -1,0 +1,22 @@
+{
+    "movies": [
+        {
+            "title": "Bovines",
+            "year": "2021",
+            "originalTitle": "Bovines",
+            "realisator": ["Director Name"],
+            "languages": ["French"],
+            "genders": ["Drama"],
+            "actors": ["Actor 1", "Actor 2"],
+            "tags": ["tag1", "tag2"],
+            "synopsis": "A detailed description of the movie.",
+            "time": "120 minutes",
+            "picture": "path/to/image.jpg",
+            "likePercentage": 85
+        }
+    ],
+    "numMovies": 1,
+    "pages": 1,
+    "currentPage": 1
+}
+

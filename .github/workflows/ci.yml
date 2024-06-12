@@ -77,9 +77,6 @@ jobs:
           cd Interface/API
           npm install
 
-      - name: Copy sonar-project.properties
-        run: cp sonar-project.properties 
-        
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:

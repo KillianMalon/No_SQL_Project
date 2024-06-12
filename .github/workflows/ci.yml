@@ -1,0 +1,84 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: |
+        cd Interface/API
+        npm install
+
+    - name: Run Unit tests
+      run: |
+        cd Interface/API
+        npm test
+
+    - name: Start application
+      run: |
+        cd Interface/API
+        npm start &
+      env:
+        NODE_ENV: test
+        PORT: 8080
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    - name: Wait for application to be available
+      run: |
+        # Wait for up to 60 seconds for the web aplication to be available
+        timeout 60s bash -c 'until curl -sSf http://localhost:8080; do sleep 5; done'
+
+    - name: Run Graphic & Integration tests (Cypress)
+      run: |
+        cd Interface/API
+        npx cypress run
+      env:
+        CYPRESS_baseUrl: http://localhost:8080
+        PORT: 8080
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    environment: Test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        
+    - name: Deploy to Server (Raspberry Pi)
+      run: |
+        ssh -o StrictHostKeyChecking=no deployer@176.160.95.82 << 'EOF'
+          export PATH=$PATH:/opt/node-v16.6.2-linux-armv7l/bin
+          cd /var/www/html/britto
+          git fetch origin main
+          git reset --hard origin/main
+          cd Interface/API
+          npm install --production
+          pm2 restart britto || pm2 start npm --name "britto" -- start
+    environment: Test

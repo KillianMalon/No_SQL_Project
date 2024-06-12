@@ -80,7 +80,7 @@ jobs:
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          args: -Dsonar.projectBaseDir=Interface/API  # Spécifier le répertoire base de votre projet
+          args: -Dsonar.projectBaseDir=./  # Spécifier le répertoire base de votre projet
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

@@ -77,10 +77,8 @@ jobs:
           cd Interface/API
           npm install
       - name: Print SonarQube URL
-        run: |
-            echo "SonarQube URL: ${{ secrets.SONAR_HOST_URL }}"
-        env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: curl -s -o /dev/null -w "%{http_code}" ${{ secrets.SONAR_HOST_URL }}
+        shell: bash
 
 
       - name: Run SonarQube Scan

@@ -83,7 +83,7 @@ jobs:
           args: >
             -Dsonar.projectBaseDir=./
             -Dsonar.host.url=https://distinct-fresh-monster.ngrok-free.app/
-        env:
+        env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 

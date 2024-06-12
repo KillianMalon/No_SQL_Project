@@ -80,7 +80,7 @@ jobs:
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          args: -Dsonar.projectBaseDir=./ -Dsonar.host.url=https://distinct-fresh-monster.ngrok-free.app/# Spécifier le répertoire base de votre projet
+          args: -Dsonar.projectBaseDir=. -Dsonar.host.url=https://distinct-fresh-monster.ngrok-free.app/# Spécifier le répertoire base de votre projet
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 

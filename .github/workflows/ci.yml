@@ -76,6 +76,12 @@ jobs:
         run: |
           cd Interface/API
           npm install
+      - name: Print SonarQube URL
+        run: |
+            echo "SonarQube URL: ${{ secrets.SONAR_HOST_URL }}"
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
 
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master

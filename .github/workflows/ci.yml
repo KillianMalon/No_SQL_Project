@@ -82,9 +82,9 @@ jobs:
         with:
           args: >
             -Dsonar.projectBaseDir=./
-            -Dsonar.host.url=https://distinct-fresh-monster.ngrok-free.app/
-        env: 
+        env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
 
       # Uncomment these lines if you want to fail the build when the Quality Gate fails

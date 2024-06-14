@@ -57,7 +57,34 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test
   
-  
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      
+      - name: Install dependencies
+        run: |
+          cd Interface/API
+          npm install
+
+      - name: Run SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          args: >
+            -Dsonar.projectBaseDir=./
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       # Uncomment these lines if you want to fail the build when the Quality Gate fails
       # - name: Check Quality Gate

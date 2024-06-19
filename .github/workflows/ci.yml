@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Check runner user
         run: whoami
+      - name: Test Docker Permissions
+        run: docker run hello-world  
   test:
     runs-on: self-hosted
 

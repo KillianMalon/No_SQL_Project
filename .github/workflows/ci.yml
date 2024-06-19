@@ -81,6 +81,9 @@ jobs:
         run: |
           cd Interface/API
           npm install
+      
+      - name: Test Docker Permissions
+        run: docker run hello-world
 
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master

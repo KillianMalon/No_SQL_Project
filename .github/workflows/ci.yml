@@ -67,6 +67,9 @@ jobs:
     runs-on: self-hosted
     
     steps:
+      - name: Test Docker Permissions
+        run: docker run hello-world
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -82,8 +85,7 @@ jobs:
           cd Interface/API
           npm install
       
-      - name: Test Docker Permissions
-        run: docker run hello-world
+      
 
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master

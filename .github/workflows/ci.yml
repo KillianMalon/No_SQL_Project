@@ -7,6 +7,15 @@ on:
     branches: [main]
 
 jobs:
+  cleanup:
+    runs-on: self-hosted
+    steps:
+      - name: Cleanup workspace
+        run: |
+          sudo rm -rf /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project/*
+          sudo chown -R killian:killian /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
+          sudo chmod -R u+rwX /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
+
   check-user:
     runs-on: self-hosted
     steps:

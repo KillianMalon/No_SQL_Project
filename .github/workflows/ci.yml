@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Cleanup workspace
         run: |
-          rm -rf /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project/*
-          chown -R killian:killian /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
-          chmod -R u+rwX /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
+          sudo rm -rf /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project/*
+          sudo chown -R killian:killian /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
+          sudo chmod -R u+rwX /home/killian/actions-runner/_work/No_SQL_Project/No_SQL_Project
 
   test:
     needs: cleanup

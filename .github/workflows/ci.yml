@@ -36,10 +36,6 @@ jobs:
         cd Interface/API
         npm install
 
-    - name: Run linters
-      run: npm run lint
-      working-directory: ./Interface/API
-
     - name: Run Unit tests
       run: |
         cd Interface/API

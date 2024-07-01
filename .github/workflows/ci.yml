@@ -77,7 +77,6 @@ jobs:
         uses: sonarsource/sonarqube-scan-action@master
         with:
           args: >
-            -Dsonar.projectBaseDir=.
             -Dsonar.projectKey=KillianMalon_No_SQL_Project_8d0af7ad-c632-4f98-bd1d-258a45702f9a
             -X
         env:

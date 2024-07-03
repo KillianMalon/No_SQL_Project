@@ -134,7 +134,7 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-    needs: test
+    needs: [test, build]
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
@@ -158,21 +158,21 @@ jobs:
           npm install --production
           pm2 restart britto || pm2 start npm --name "britto" -- start
 
-    - name: Notify Discord on Deployment Success
-      if: success()
-      uses: DiscordHooks/discord-webhook-action@master
-      with:
-        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        username: 'Deployment Bot'
-        content: 'Deployment to Raspberry Pi was successful! 🚀'
+    # - name: Notify Discord on Deployment Success
+    #   if: success()
+    #   uses: DiscordHooks/discord-webhook-action@master
+    #   with:
+    #     webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    #     username: 'Deployment Bot'
+    #     content: 'Deployment to Raspberry Pi was successful! 🚀'
 
-    - name: Notify Discord on Deployment Failure
-      if: failure()
-      uses: DiscordHooks/discord-webhook-action@master
-      with:
-        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        username: 'Deployment Bot'
-        content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
+    # - name: Notify Discord on Deployment Failure
+    #   if: failure()
+    #   uses: DiscordHooks/discord-webhook-action@master
+    #   with:
+    #     webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    #     username: 'Deployment Bot'
+    #     content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
 
     environment: Test 
       

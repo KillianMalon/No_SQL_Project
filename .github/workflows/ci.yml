@@ -133,8 +133,8 @@ jobs:
           args: >
             -Dsonar.projectBaseDir=./Interface/API
             -Dsonar.projectKey=KillianMalon_No_SQL_Project_8d0af7ad-c632-4f98-bd1d-258a45702f9a
-            -Dcommit.author="$COMMIT_AUTHOR_NAME"
-            -Dcommit.email="$COMMIT_AUTHOR_EMAIL" 
+            -Dsonar.projectAuthor="$COMMIT_AUTHOR_NAME"
+            -Dsonar.projectEmail="$COMMIT_AUTHOR_EMAIL" 
             -X 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -154,7 +154,7 @@ jobs:
     if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repository 
       uses: actions/checkout@v2
 
     - name: Install SSH key

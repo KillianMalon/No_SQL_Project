@@ -7,12 +7,37 @@ on:
     branches: [main]
 
 jobs:
+
+  lint:
+      runs-on: self-hosted
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x' # ou une autre version spécifique
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint JavaScript Code
+        run: npx eslint .
+
+      # - name: Lint Dockerfile
+      #   uses: hadolint/hadolint-action@v1.5.0
+      #   with:
+      #     dockerfile: "./Dockerfile"
+        
+      - name: Audit Dependencies
+        run: npm audit
   test:
     runs-on: self-hosted
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x, 16.x]
 
     steps:
     - name: Checkout repository
@@ -27,11 +52,6 @@ jobs:
       run: |
         cd Interface/API
         npm install
-
-    # - name: Lint code
-    #   run: |
-    #     cd Interface/API
-    #     npm run lint
 
     - name: Run Unit tests
       run: |

@@ -62,12 +62,16 @@ jobs:
     - name: Run Unit tests
       run: |
         cd Interface/API
-        npm test
+        npm test -- --coverage  # Assurez-vous que votre script npm test génère des informations de couverture
 
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4.0.1
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2  # Utilisation de la version 2 de l'action codecov
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}  
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: './Interface/API/coverage/lcov.info'  # Assurez-vous que le chemin d'accès au fichier lcov.info est correct
+        flags: unittests  # Optionnel: ajoute des flags pour identifier le contexte des tests
+        name: codecov-umbrella  # Optionnel: donne un nom spécifique au téléversement pour faciliter l'identification
+        verbose: true  # Pour plus de détails dans les logs si nécessaire
 
     - name: Start application
       run: |

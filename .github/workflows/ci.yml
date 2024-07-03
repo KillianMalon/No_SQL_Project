@@ -51,7 +51,7 @@ jobs:
       run: |
         # Wait for up to 60 seconds for the web aplication to be available
         timeout 60s bash -c 'until curl -sSf http://localhost:8080; do sleep 5; done'
-        
+
     - name: Run Graphic & Integration tests (Cypress)
       run: |
         cd Interface/API
@@ -61,7 +61,7 @@ jobs:
         PORT: 8080
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test
-  
+   
   build:
     name: Build and analyze
     runs-on: ubuntu-latest

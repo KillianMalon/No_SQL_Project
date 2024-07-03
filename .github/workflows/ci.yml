@@ -134,7 +134,7 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-    needs: [test, build]
+    needs: [test, build, lint]
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
@@ -175,4 +175,4 @@ jobs:
     #     content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
 
     environment: Test 
-      
+       

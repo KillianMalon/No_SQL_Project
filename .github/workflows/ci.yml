@@ -72,7 +72,7 @@ jobs:
         NODE_ENV: test
         PORT: 8080
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
+ 
     - name: Wait for application to be available
       run: |
         # Wait for up to 60 seconds for the web aplication to be available

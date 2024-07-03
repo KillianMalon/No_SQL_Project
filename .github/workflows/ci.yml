@@ -111,7 +111,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18.x'
-      
+
+      - name: Get commit details
+        run: |
+          echo "COMMIT_AUTHOR_NAME=$(git log -1 --format='%an')" >> $GITHUB_ENV
+          echo "COMMIT_AUTHOR_EMAIL=$(git log -1 --format='%ae')" >> $GITHUB_ENV
+
+
       - name: Install dependencies
         run: |
           cd Interface/API
@@ -122,6 +128,8 @@ jobs:
           args: >
             -Dsonar.projectBaseDir=./Interface/API
             -Dsonar.projectKey=KillianMalon_No_SQL_Project_8d0af7ad-c632-4f98-bd1d-258a45702f9a
+            -Dcommit.author.name=$COMMIT_AUTHOR_NAME 
+            -Dcommit.author.email=$COMMIT_AUTHOR_EMAIL
             -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

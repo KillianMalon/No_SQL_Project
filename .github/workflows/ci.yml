@@ -133,12 +133,14 @@ jobs:
           args: >
             -Dsonar.projectBaseDir=./Interface/API
             -Dsonar.projectKey=KillianMalon_No_SQL_Project_8d0af7ad-c632-4f98-bd1d-258a45702f9a
-            -Dsonar.author.name=$COMMIT_AUTHOR_NAME 
-            -Dsonar.author.email=$COMMIT_AUTHOR_EMAIL
+            -Dsonar.scm.author=$COMMIT_AUTHOR_NAME 
+            -Dsonar.scm.authorEmail=$COMMIT_AUTHOR_EMAIL
             -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          COMMIT_AUTHOR_NAME: ${{ env.COMMIT_AUTHOR_NAME }}
+          COMMIT_AUTHOR_EMAIL: ${{ env.COMMIT_AUTHOR_EMAIL }}
 
       # Uncomment these lines if you want to fail the build when the Quality Gate fails
       # - name: Check Quality Gate

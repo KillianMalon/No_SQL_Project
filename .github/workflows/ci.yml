@@ -157,5 +157,22 @@ jobs:
           cd Interface/API
           npm install --production
           pm2 restart britto || pm2 start npm --name "britto" -- start
-    environment: Test
+
+    - name: Notify Discord on Deployment Success
+      if: success()
+      uses: rjstone/discord-webhook-notify@v1.0.3
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        username: 'Deployment Bot'
+        content: 'Deployment to Raspberry Pi was successful! 🚀'
+
+    - name: Notify Discord on Deployment Failure
+      if: failure()
+      uses: rjstone/discord-webhook-notify@v1.0.3
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        username: 'Deployment Bot'
+        content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
+
+    environment: Test 
       

@@ -116,6 +116,9 @@ jobs:
         run: |
           echo "COMMIT_AUTHOR_NAME=$(git log -1 --format='%an')" >> $GITHUB_ENV
           echo "COMMIT_AUTHOR_EMAIL=$(git log -1 --format='%ae')" >> $GITHUB_ENV
+          echo "COMMIT_AUTHOR_NAME
+          echo "COMMIT_AUTHOR_EMAIL
+
 
 
       - name: Install dependencies

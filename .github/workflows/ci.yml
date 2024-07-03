@@ -28,7 +28,10 @@ jobs:
         cd Interface/API
         npm install
 
-    
+    - name: Lint code
+      run: |
+        cd Interface/API
+        npm run lint
 
     - name: Run Unit tests
       run: |

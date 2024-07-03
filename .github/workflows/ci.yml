@@ -138,7 +138,7 @@ jobs:
             -X 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} 
           COMMIT_AUTHOR_NAME: ${{ env.COMMIT_AUTHOR_NAME }}
           COMMIT_AUTHOR_EMAIL: ${{ env.COMMIT_AUTHOR_EMAIL }}
 

@@ -39,7 +39,7 @@ jobs:
           cd Interface/API
           npm audit
   test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:

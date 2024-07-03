@@ -9,7 +9,7 @@ on:
 jobs:
 
   lint:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
           cd Interface/API
           npm audit
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -126,7 +126,7 @@ jobs:
 
   deploy:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
     steps:

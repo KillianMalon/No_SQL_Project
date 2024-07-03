@@ -160,7 +160,7 @@ jobs:
 
     - name: Notify Discord on Deployment Success
       if: success()
-      uses: rjstone/discord-webhook-notify@v1.0.3
+      uses: DiscordHooks/discord-webhook-action@master
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
         username: 'Deployment Bot'
@@ -168,7 +168,7 @@ jobs:
 
     - name: Notify Discord on Deployment Failure
       if: failure()
-      uses: rjstone/discord-webhook-notify@v1.0.3
+      uses: DiscordHooks/discord-webhook-action@master
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
         username: 'Deployment Bot'

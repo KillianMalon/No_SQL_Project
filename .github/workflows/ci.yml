@@ -27,10 +27,17 @@ jobs:
       run: |
         cd Interface/API
         npm install
+
+    - name: Lint code
+      run: |
+        cd Interface/API
+        npm run lint
+
     - name: Run Unit tests
       run: |
         cd Interface/API
         npm test
+
     - name: Start application
       run: |
         cd Interface/API
@@ -44,6 +51,7 @@ jobs:
       run: |
         # Wait for up to 60 seconds for the web aplication to be available
         timeout 60s bash -c 'until curl -sSf http://localhost:8080; do sleep 5; done'
+        
     - name: Run Graphic & Integration tests (Cypress)
       run: |
         cd Interface/API

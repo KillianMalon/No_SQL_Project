@@ -20,10 +20,14 @@ jobs:
           node-version: '18.x' # ou une autre version spécifique
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd Interface/API
+          npm install
 
       - name: Lint JavaScript Code
-        run: npx eslint .
+        run: |
+          cd Interface/API
+          npx eslint .
 
       # - name: Lint Dockerfile
       #   uses: hadolint/hadolint-action@v1.5.0
@@ -31,7 +35,9 @@ jobs:
       #     dockerfile: "./Dockerfile"
         
       - name: Audit Dependencies
-        run: npm audit
+        run: |
+          cd Interface/API
+          npm audit
   test:
     runs-on: self-hosted
 

@@ -4,7 +4,7 @@ name: Update Version in Package.json
 on:
   push:
     tags:
-      - 'v*'
+      - v* 
 
 jobs:
   update-version:

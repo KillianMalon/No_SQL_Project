@@ -62,15 +62,15 @@ jobs:
     - name: Run Unit tests
       run: |
         cd Interface/API
-        npm test -- --coverage  # Assurez-vous que votre script npm test génère des informations de couverture
+        npm test
 
     - name: Upload test results
-      if: success() || failure()
-      uses: actions/upload-artifact@v4
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        name: test-results
-        path: mocha-junit.xml   
-        reporter: mocha-junit-reporter
+        name: Resultats des tests
+        path: '**/test-results.json'
+        reporter: mocha-json
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2  # Utilisation de la version 2 de l'action codecov

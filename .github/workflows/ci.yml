@@ -42,12 +42,13 @@ jobs:
           npm audit
 
   lint_DockerFile:
+      name: Lint Dockerfile
       runs-on: ubuntu-latest
-      steps:
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v1.5.0
-        with:
-          dockerfile: "./Interface/API/Dockerfile"
+      steps: 
+        - uses: actions/checkout@v3
+        - uses: hadolint/hadolint-action@v3.1.0
+          with:
+            dockerfile: ./Interface/API/Dockerfile
              
   test:
     runs-on: self-hosted

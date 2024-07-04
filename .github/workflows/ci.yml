@@ -62,15 +62,7 @@ jobs:
     - name: Run Unit tests
       run: |
         cd Interface/API
-        npm test
-
-    - name: Upload test results
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-        name: Resultats des tests
-        path: '**/test-results.json'
-        reporter: mocha-json
+        npm run test:unit -- --coverage  # Assurez-vous que votre script npm test génère des informations de couverture
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2  # Utilisation de la version 2 de l'action codecov
@@ -199,3 +191,18 @@ jobs:
 
     environment: Test 
         
+  report:
+    needs: [test, build, lint, deploy]
+    runs-on: self-hosted
+    steps:
+      - name: Run Unit tests
+        run: |
+          cd Interface/API
+          npm run test:view -- --reporter json > test-results.json
+      - name: Workflow test
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Resultats des tests
+          path: '**/test-results.json'
+          reporter: mocha-json

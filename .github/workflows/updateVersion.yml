@@ -1,0 +1,34 @@
+
+name: Update Version in Package.json
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  update-version:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # Utilisez la version de Node.js qui correspond à votre projet
+
+      - name: Extract version number from tag
+        id: get_version
+        run: echo "::set-output name=VERSION::${GITHUB_REF#refs/tags/v}"
+
+      - name: Update version in package.json
+        run: npm version ${{ steps.get_version.outputs.VERSION }} --no-git-tag-version
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "killian.malon@ecoles-epsi.net"
+          git config --global user.name "Killian  Malon"
+          git add package.json
+          git commit -m "chore: bump version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
+          git push

@@ -222,4 +222,4 @@ jobs:
       with:
         name: Resultats des tests
         path: '**/test-results.json'
-        reporter: mocha-json
+        reporter: mocha-json 

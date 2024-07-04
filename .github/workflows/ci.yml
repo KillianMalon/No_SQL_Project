@@ -2,9 +2,10 @@ name: Node.js CI
 
 on:
   push:
+  
     branches: [main]
     tags:
-      - 'v*'  # Déclencher le workflow pour les tags commençant par 'v
+      - v*  # Déclencher le workflow pour les tags commençant par 'v
   pull_request:
     branches: [main]
 
@@ -13,7 +14,7 @@ permissions:
   checks: write
 
 jobs:
- 
+  
   lint:
       runs-on: self-hosted
       steps:

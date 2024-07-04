@@ -194,15 +194,32 @@ jobs:
   report:
     needs: [test, build, lint, deploy]
     runs-on: self-hosted
-    steps: 
-      - name: Run Unit tests
-        run: |
-          cd Interface/API
-          npm run test:view -- --reporter json > test-results.json
-      - name: Workflow test
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Resultats des tests
-          path: '**/test-results.json'
-          reporter: mocha-json
+    strategy:
+      matrix:
+        node-version: [18.x, 16.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: |
+        cd Interface/API
+        npm install
+    
+    - name: Run Unit tests
+      run: |
+        cd Interface/API
+        npm run test:view -- --reporter json > test-results.json
+    - name: Workflow test
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Resultats des tests
+        path: '**/test-results.json'
+        reporter: mocha-json

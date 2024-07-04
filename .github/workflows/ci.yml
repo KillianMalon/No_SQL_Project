@@ -3,13 +3,15 @@ name: Node.js CI
 on:
   push:
     branches: [main]
+    tags:
+      - 'v*'  # Déclencher le workflow pour les tags commençant par 'v
   pull_request:
     branches: [main]
 
 permissions:
   contents: read
   checks: write
-  
+
 jobs:
 
   lint:
@@ -100,7 +102,41 @@ jobs:
         PORT: 8080
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
     environment: Test
-   
+
+  report:
+    needs: [test, lint]
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [18.x, 16.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: |
+        cd Interface/API
+        npm install
+    
+    - name: Run Unit tests
+      run: |
+        cd Interface/API
+        npm run test:view -- --reporter json > test-results.json
+    - name: Workflow test
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Resultats des tests
+        path: '**/test-results.json'
+        reporter: mocha-json 
+
+
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
@@ -153,7 +189,7 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-    needs: [test, build, lint]
+    needs: [test, build, lint, report]
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
 
@@ -195,35 +231,4 @@ jobs:
 
     environment: Test 
         
-  report:
-    needs: [test, build, lint, deploy]
-    runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: [18.x, 16.x]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: |
-        cd Interface/API
-        npm install
-    
-    - name: Run Unit tests
-      run: |
-        cd Interface/API
-        npm run test:view -- --reporter json > test-results.json
-    - name: Workflow test
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-        name: Resultats des tests
-        path: '**/test-results.json'
-        reporter: mocha-json 
+  

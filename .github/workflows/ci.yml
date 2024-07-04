@@ -260,7 +260,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./Interface/API
+          file: ./Interface/API/Dockerfile
           push: true
-          tags: killianmalon/image-project
+          tags: killianmalon/image-project:latest
 
     

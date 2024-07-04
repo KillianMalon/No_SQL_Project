@@ -11,7 +11,7 @@ COPY Interface/API/package*.json ./
 RUN npm install
 
 # Copier le reste du dossier Interface/API dans le conteneur.
-COPY Interface/API/ ./
+COPY Interface/API/ /usr/src/app/
 
 # Exposer le port que votre API utilise.
 EXPOSE 3000

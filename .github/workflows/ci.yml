@@ -173,21 +173,21 @@ jobs:
           npm install --production
           pm2 restart britto || pm2 start npm --name "britto" -- start
 
-    # - name: Notify Discord on Deployment Success
-    #   if: success()
-    #   uses: DiscordHooks/discord-webhook-action@master
-    #   with:
-    #     webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-    #     username: 'Deployment Bot'
-    #     content: 'Deployment to Raspberry Pi was successful! 🚀'
+    - name: Notify Discord on Deployment Success
+      if: success()
+      uses: tsickert/discord-webhook@v5.3.0
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        username: 'Deployment Bot'
+        content: 'Deployment to Raspberry Pi was successful! 🚀'
 
-    # - name: Notify Discord on Deployment Failure
-    #   if: failure()
-    #   uses: DiscordHooks/discord-webhook-action@master
-    #   with:
-    #     webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-    #     username: 'Deployment Bot'
-    #     content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
+    - name: Notify Discord on Deployment Failure
+      if: failure()
+      uses: tsickert/discord-webhook@v5.3.0
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        username: 'Deployment Bot'
+        content: 'Deployment to Raspberry Pi failed! ❌ Check the logs for more details.'
 
     environment: Test 
         

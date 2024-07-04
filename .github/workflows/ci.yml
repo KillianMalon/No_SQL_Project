@@ -194,7 +194,7 @@ jobs:
   report:
     needs: [test, build, lint, deploy]
     runs-on: self-hosted
-    steps:
+    steps: 
       - name: Run Unit tests
         run: |
           cd Interface/API

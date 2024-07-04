@@ -243,7 +243,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build -t myapp:${{ github.sha }} .
+        run: docker build -t myapp:${{ github.sha }} -f Interface/API/Dockerfile Interface/API/
 
       - name: Login to DockerHub
         uses: docker/login-action@v1

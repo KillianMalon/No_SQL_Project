@@ -249,7 +249,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd Interface/API
-          docker build -t myapp:${{ github.sha }} -f ./Interface/API/Dockerfile ./Interface/API/
+          docker build -t myapp:${{ github.sha }} -f Dockerfile .
 
       - name: Login to DockerHub
         uses: docker/login-action@v1

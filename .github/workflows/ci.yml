@@ -76,13 +76,13 @@ jobs:
         npm run test:unit -- --coverage  # Assurez-vous que votre script npm test génère des informations de couverture
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2  # Utilisation de la version 2 de l'action codecov
+      uses: codecov/codecov-action@v2  
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: './Interface/API/coverage/lcov.info'  # Assurez-vous que le chemin d'accès au fichier lcov.info est correct
-        flags: unittests  # Optionnel: ajoute des flags pour identifier le contexte des tests
-        name: codecov-umbrella  # Optionnel: donne un nom spécifique au téléversement pour faciliter l'identification
-        verbose: true  # Pour plus de détails dans les logs si nécessaire
+        files: './Interface/API/coverage/lcov.info'  
+        flags: unittests  
+        name: codecov-umbrella  
+        verbose: true  
 
     - name: Start application
       run: |
@@ -150,7 +150,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  
       
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -196,7 +196,7 @@ jobs:
   deploy:
     needs: [test, build, lint, report]
     runs-on: self-hosted
-    if: github.ref == 'refs/heads/main'  # Déclencher ce job uniquement pour la branche main
+    if: github.ref == 'refs/heads/main'  
 
     steps:
     - name: Checkout repository 
@@ -243,29 +243,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Build Docker image
-        run: |
-          cd Interface/API
-          docker build -t myapp:${{ github.sha }} -f Dockerfile .
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+
+      - name: Build and push Docker images
+        id: push
+        uses: docker/build-push-action@v6
         with:
           context: ./Interface/API
-          file: ./Interface/API/Dockerfile
           push: true
-          tags: yourusername/yourappname:latest
-          build_args: |
-            NODE_VERSION=18.x 
-            PORT=8080
-            DATABASE_URL=$DATABASE_URL
+          tags: killianmalon/image-project
 
+    
